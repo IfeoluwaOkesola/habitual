@@ -4,6 +4,7 @@ const dotenv = require('dotenv')
 dotenv.config()
 const bcrypt = require ('bcrypt')
 const saltRounds = 10
+const jwt = require('jsonwebtoken')
 const secret = process.env.SECRET
 
 const registerMentor = async (req,res)=>{
@@ -30,4 +31,31 @@ if (fullname && email && password){
 }
 
 
-module.exports = {registerMentor}
+const mentorlogin = async (req, res) => {
+    const { email, password } = req.body;
+    if (email && password) {
+      const result = await mentor.findOne({
+        email: email,
+      });
+      if (result) {
+        console.log(result);
+        const valid = bcrypt.compare(password, result.password);
+        if (valid) {
+          const token = jwt.sign({ result }, secret);
+          res.status(200).json({ message: token });
+          //console.log(result)
+        } else {
+          res.json({ message: 'incorrect password' });
+          console.log('incorrect password');
+        }
+      } else {
+        res.json({ message: 'user not found' });
+      }
+    } else {
+      res.json({ message: 'enter user details' });
+      console.log('enter user details');
+    }
+  };
+  
+
+module.exports = {registerMentor, mentorlogin}
