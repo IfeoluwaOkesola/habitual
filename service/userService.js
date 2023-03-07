@@ -1,5 +1,7 @@
 const mentor = require("../model/mentorModel");
 const user = require("../model/userModel");
+const bcrypt = require('bcrypt');
+
 
 async function createUserService(newUser){
     try {
@@ -22,5 +24,17 @@ async function createMentorService(newUser){
 }
 
 
+async function createLoginService(newUser){
+    try {
+        const result = await user.findOne({email:email})
+        if (result){
+            const valid = await bcrypt.compare(password, result.password);
+            return valid;
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
 
-module.exports = {createUserService, createMentorService}
+
+module.exports = {createUserService, createMentorService, createLoginService}
