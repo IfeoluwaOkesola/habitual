@@ -52,7 +52,7 @@ const userlogin = async (req, res) => {
 
       if (valid) {
         const token = createToken(result._id);
-        res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
+        res.cookie('jwt', token, { httpOnly: false, sameSite:'None', secure: true,maxAge: maxAge * 1000});
         res.status(200).json({ user: result._id });
         //console.log(result)
       } else {

@@ -1,0 +1,134 @@
+body {
+	max-width: 1400px; /* set a maximum width of 1200 pixels */ 
+	font-family: 'Manrope', sans-serif;
+	
+}
+
+#container {
+	display: flex;
+	background-color: #441582;
+	width: 600px;
+	height: 700px;
+	position: absolute;
+	margin-top: auto;
+}
+
+#logo {
+	height: 100px;
+	margin-right: 300px;
+}
+
+#image {
+	position: absolute;
+	left: 0;
+	top: 200px;
+}
+
+#right {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items:flex-end;
+	justify-content: center;
+	margin-top: auto;
+	margin-bottom: 0px;
+    margin-right: 200px;
+	background-color: #fff;
+	
+    }
+
+#section {
+	float: right;
+	padding: 50px;
+	color: #fff;
+	opacity: 0.8;
+}
+
+#section h2 {
+	margin-top: 0;
+    margin-right: 200px;
+    text-align: left;
+	font-weight: 600px;
+	font-size: 30px;
+	display: flex;
+	align-items: center;
+	color: #474242;
+}
+
+#section p {
+	margin-top: -20px;
+    text-align: left;
+	font-weight: 400px;
+	font-size: 14px;
+	line-height: 18px;
+	align-items: center;
+	color: #B5B3B3;
+}
+.fb-btn, .google-btn {
+	padding: 10px;
+	box-sizing: border-box;
+	background-color: #FFFFFF;
+	border: 1px solid #918EBE;
+	border-radius: 10px;
+	font-size: 16px;
+	margin-right: 10px;
+}
+
+.fb-btn:hover, .google-btn:hover {
+	cursor: pointer;
+	opacity: 0.8;
+}
+
+.fb-btn i, .google-btn i {
+	margin-right: 10px;
+}
+
+#buttons {
+	margin-top: -40px;
+    margin-right:50px;
+	display: flex;
+}
+form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-right: 60px;
+	margin-top: 60px;
+}
+
+label {
+	color: #221C1C;
+	font-size: 14px;
+	font-weight: 400;
+	margin-bottom: 10px;
+	margin-right: 100px;
+    text-align: left;
+}
+
+input {
+	padding: 10px;
+	border-radius: 10px;
+	border: 1px solid #918E8E;
+	margin-bottom: 20px;
+	width: 420px;
+	margin-left: 200px;
+}
+button[type="submit"] {
+	background-color: #441582;
+	color: #fff;
+	margin-top: 20px;
+	cursor: pointer;
+	border-radius: 8px;
+	width: 440px;
+	padding: 10px;
+	align-items: center;
+	flex-direction: row;
+	justify-content: center;
+	margin-left: 200px;
+}
+
+  #signin-txt{
+	margin-right: 170px;
+	font-weight: 400;
+}
+  

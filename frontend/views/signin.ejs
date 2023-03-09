@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>signup</title>
+	<link rel="stylesheet" href="../css/signup.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+	<div id="container">
+        <a href="/">
+            <img id="logo" src="Assets/logo2.png">
+        </a>
+		<img id="image" src="Assets/signup.png">
+	</div>
+    <div id="right">
+        <div id="section">
+            <h2>Welcome Back!</h2>
+            <p>Sign up with one of the following options</p>
+        </div>
+        <div id="buttons">
+            <button class="fb-btn"><i class="fab fa-facebook"></i> Continue with Facebook</button>
+            <button class="google-btn"><i class="fab fa-google"></i> Continue with Google</button>
+        </div>
+        <form id="formlogin">
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">Login</button>
+        </form>
+        <div id="signin-txt">
+            <p>
+                No Account?
+                <a href="/signUp">Sign Up</a>
+            </p>
+
+        </div>
+       
+    </div>
+    <script>
+        const form = document.getElementById('formlogin');
+    if(form){
+      form.addEventListener("submit",(e)=>{
+       
+        e.preventDefault();
+      login()
+     
+      })
+      }
+    
+    
+      function login(){
+      const email =   document.getElementById('email').value
+        const password = document.getElementById('password').value
+       
+    axios.post( 'http://127.0.0.1:8080/login', {
+        email: email,
+        password: password
+    }, {withCredentials:true}).then(res=>{
+      console.log(res)
+    if(res.data.message == "incorrect password")
+    {
+      Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Incorrect password',
+    })
+    }else if(res.data.message == "user not found"){
+      Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'user not found',
+    })
+
+    }
+    
+    else if(res.data.user){
+      console.log(res.data.user)
+      //localStorage.setItem("token",res.data[0].message)
+      window.location = '/'
+       
+    }
+    
+    
+    
+    }).catch(err=>{
+      console.log(err)
+    })
+    
+    
+    }
+    </script>
+</body>
+</html>
