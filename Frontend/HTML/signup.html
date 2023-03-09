@@ -2,84 +2,83 @@
 <html>
 <head>
 	<title>signup</title>
-	<link rel="stylesheet" href="../css/signup.css">
+	<link rel="stylesheet" href="../CSS/signup.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 	<div id="container">
-        <a href="/">
+        <a href="../HTML/index.html">
             <img id="logo" src="Assets/logo2.png">
         </a>
 		<img id="image" src="Assets/signup.png">
 	</div>
     <div id="right">
         <div id="section">
-            <h2>Welcome Back!</h2>
+            <h2>Let's Get Started</h2>
             <p>Sign up with one of the following options</p>
         </div>
         <div id="buttons">
             <button class="fb-btn"><i class="fab fa-facebook"></i> Continue with Facebook</button>
             <button class="google-btn"><i class="fab fa-google"></i> Continue with Google</button>
         </div>
-        <form id="formlogin">
+        <form id="formId">
+            <label for="name">Full Name:</label>
+            <input type="text" id="fullname" name="name" required>
             <label for="email">Email Address:</label>
             <input type="email" id="email" name="email" required>
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
-            <button type="submit">Login</button>
+            <button type="submit">Create Account</button>
         </form>
         <div id="signin-txt">
             <p>
-                No Account?
-                <a href="/signUp">Sign Up</a>
+                Already a member?
+                <a href="../HTML/signin.html">Sign In</a>
             </p>
 
         </div>
        
     </div>
     <script>
-        const form = document.getElementById('formlogin');
+          const form = document.getElementById('formId');
     if(form){
       form.addEventListener("submit",(e)=>{
-       
+        console.log('click')
         e.preventDefault();
-      login()
+    register()
      
       })
       }
     
-    
-      function login(){
+     function register(){
+      const fullname =  document.getElementById('fullname').value
       const email =   document.getElementById('email').value
         const password = document.getElementById('password').value
        
-    axios.post( 'http://127.0.0.1:8080/login', {
+    axios.post('https://habitual-zdhv.onrender.com',{
+        fullname: fullname,
         email: email,
         password: password
-    }, {withCredentials:true}).then(res=>{
-      console.log(res)
-    if(res.data.message == "incorrect password")
+    }).then(res=>{
+      console.log(res.data)
+    if(res.data.message == "user already exist")
     {
       Swal.fire({
       icon: 'error',
       title: 'Oops...',
-      text: 'Incorrect password',
+      text: 'User already registered',
     })
-    }else if(res.data.message == "user not found"){
-      Swal.fire({
-      icon: 'error',
-      title: 'Oops...',
-      text: 'user not found',
-    })
-
-    }
+    }else if(res.data.message == "user created"){
     
-    else if(res.data.user){
-      console.log(res.data.user)
-      //localStorage.setItem("token",res.data[0].message)
-      window.location = '/'
+      Swal.fire(
+          'Account Created !',
+          'Thanks for joining us.',
+          'success'
+        ).then(rs=>{
+           window.location = '../HTML/signin.html'
+        })
        
     }
     
@@ -88,9 +87,7 @@
     }).catch(err=>{
       console.log(err)
     })
-    
-    
-    }
+}
     </script>
 </body>
 </html>
